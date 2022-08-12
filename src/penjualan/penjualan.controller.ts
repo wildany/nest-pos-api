@@ -6,11 +6,22 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { PenjualanService } from './penjualan.service';
-import { CreatePenjualanDto, penjualanIdDto } from './dto/create-penjualan.dto';
+import {
+  CreatePenjualanDto,
+  FindPenjualanDto,
+  penjualanIdDto,
+  ResponsePenjualanDto,
+} from './dto/create-penjualan.dto';
 import { UpdatePenjualanDto } from './dto/update-penjualan.dto';
-import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { PenjualanProses } from './penjualan-proses.decorator';
 import { JwtGuard } from 'src/auth/jwt.guard';
 
@@ -28,8 +39,9 @@ export class PenjualanController {
   }
 
   @Get()
-  findAll() {
-    return this.penjualanService.findAll();
+  @ApiOkResponse({ type: ResponsePenjualanDto })
+  findAll(@Query() filter: FindPenjualanDto) {
+    return this.penjualanService.findAll(filter);
   }
 
   @Get(':id')

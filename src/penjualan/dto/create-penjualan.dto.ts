@@ -5,9 +5,11 @@ import {
   IsDate,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { PageRequestDto, PageResponseDto } from 'src/etc/dto/page-dto';
 import { IsExist } from 'src/etc/validator/exist-validator';
 import { IsUnique } from 'src/etc/validator/unique-validator';
 import { KonsumanIdDto } from 'src/konsumen/dto/create-konsuman.dto';
@@ -63,3 +65,20 @@ export class PenjualanDto {
 }
 export class CreatePenjualanDto extends OmitType(PenjualanDto, ['id']) {}
 export class penjualanIdDto extends PickType(PenjualanDto, ['id']) {}
+
+export class FindPenjualanDto extends PageRequestDto {
+  @ApiProperty({ required: false })
+  @IsString()
+  @IsOptional()
+  no_faktur: string;
+
+  @ApiProperty({ required: false })
+  @IsDate()
+  @IsOptional()
+  tanggal: Date;
+}
+
+export class ResponsePenjualanDto extends PageResponseDto {
+  @ApiProperty({ type: [PenjualanDto] })
+  data: PenjualanDto[];
+}

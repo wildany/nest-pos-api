@@ -8,11 +8,23 @@ import {
   UseGuards,
   UseInterceptors,
   UploadedFile,
+  Query,
 } from '@nestjs/common';
 import { ProdukService } from './produk.service';
-import { CreateProdukDto, ProdukIdDto } from './dto/create-produk.dto';
+import {
+  CreateProdukDto,
+  FindProdukDto,
+  ProdukIdDto,
+  ResponseProductDto,
+} from './dto/create-produk.dto';
 import { UpdateProdukDto } from './dto/update-produk.dto';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtGuard } from 'src/auth/jwt.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -49,8 +61,9 @@ export class ProdukController {
   }
 
   @Get()
-  findAll() {
-    return this.produkService.findAll();
+  @ApiOkResponse({ type: ResponseProductDto })
+  findAll(@Query() page: FindProdukDto) {
+    return this.produkService.findAll(page);
   }
 
   @Get(':id')
