@@ -1,4 +1,4 @@
-import { createParamDecorator, ExecutionContext, Req } from '@nestjs/common';
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export const PenjualanProses = createParamDecorator(
   (data: any, ctx: ExecutionContext) => {

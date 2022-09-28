@@ -61,7 +61,7 @@ export class ProdukController {
   }
 
   @Get()
-  @ApiOkResponse({ type: ResponseProductDto })
+  @ApiOkResponse({ type: ResponseProductDto }) //format data seperti ResponseProductDto
   findAll(@Query() page: FindProdukDto) {
     return this.produkService.findAll(page);
   }

@@ -20,6 +20,7 @@ export class AuthController {
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   cekUser(@Request() req) {
+    console.log(req);
     return req.user;
   }
 
