@@ -27,7 +27,9 @@ async function bootstrap() {
 
   const configSwagger = new DocumentBuilder()
     .setTitle('Point of Sales')
-    .setDescription('Dokumentasi untuk api point of sales')
+    .setDescription(
+      'Selamat datang di dokumentasi Point of Sales API. untuk login silahkan create user terlebih dahulu di endpoint /user',
+    )
     .setVersion('1.0.0')
     .addBearerAuth()
     .build();
