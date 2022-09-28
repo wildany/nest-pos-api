@@ -9,6 +9,7 @@ import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+  const port = process.env.PORT || 3000;
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.useGlobalPipes(
@@ -36,6 +37,6 @@ async function bootstrap() {
   };
   const doc = SwaggerModule.createDocument(app, configSwagger);
   SwaggerModule.setup('doc', app, doc, configCustomSwagger);
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
