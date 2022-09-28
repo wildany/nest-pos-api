@@ -41,7 +41,7 @@ import { PageService } from './etc/service/page/page.service';
         PenjualanBayar,
       ],
       synchronize: true,
-      ssl: true,
+      ssl: { rejectUnauthorized: false },
     }),
     UserModule,
     AuthModule,
